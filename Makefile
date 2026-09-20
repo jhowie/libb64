@@ -31,12 +31,14 @@ $(OBJDIR)/b64toasc: $(OBJDIR)/b64toasc.o
 clean:
 	rm -rf obj lib
 
-install: $(LIBDIR)/liblb64.a parseJSON.h
+install: $(LIBDIR)/libb64.a $(OBJDIR)/asctob64 $(OBJDIR)/b64toasc
 	install -d -o root -g wheel $(INSTALLLIBDIR)
 	install -c -o root -g wheel -m 0444 $(LIBDIR)/libb64.a $(INSTALLLIBDIR)
 	install -d -o root -g wheel $(INSTALLINCLUDEDIR)
 	install -c -o root -g wheel -m 0444 b64.h $(INSTALLINCLUDEDIR)
-
+	install -d -o root -g wheel $(INSTALLBINDIR)
+	install -c -o root -g wheel -m 0444 $(OBJDIR)/asctob64 $(INSTALLBINDIR)
+	install -c -o root -g wheel -m 0444 $(OBJDIR)/b64toasc $(INSTALLBINDIR)
 
 
 
