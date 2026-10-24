@@ -1,0 +1,52 @@
+.\"	$NetBSD: mdoc.template,v 1.2 1997/03/25 07:20:01 mikel Exp $
+.\"
+.\" Copyright notice
+.\"
+.\" The following requests are required for all man pages.
+.Dd 2026-10-24
+.Dt asctob64 1
+.Os
+.Sh NAME
+.Nm asctob64
+.Nd a tool for encoding an ASCII string to Base64
+.Sh SYNOPSIS
+.Nm asctob64
+.Op Fl hu
+.Ar string
+.Sh DESCRIPTION
+The command takes an ASCII
+.Ar string
+and returns a Base64-encoded equivalent string.
+.Pp
+The string should be enclosed in double quotes if it contains spaces.
+.Pp
+The
+.Op -u 
+option instructs the program to use URL-safe encoding rules when encoding the
+string.
+.Pp
+The
+.Op -h 
+option simply instructs the program to display usage information. No conversion
+is done.
+.Sh RETURN VALUES
+The program returns 0 on success, and 1 when an error occurred.
+.Sh EXAMPLES
+.Bd -literal -offset
+asctob64 "Hello, World!"
+.Sh SEE ALSO
+.Xr b64toasc 1 ,
+.Xr b64 3
+.Sh STANDARDS
+.Pp
+The program implements Base64 encoding and decoding according to the Internet
+Engineering Task Force (IETF) Request For Comments (RFC) 4648 "The Base16,
+Base32, and Base64 Data Encodings" standard.
+.Pp
+.Sh AUTHORS
+.Pp
+.An John Howie (Howie Consulting Inc.)
+.Mt john@howieconsultinginc.com
+.Pp
+.Sh BUGS
+There are no known bugs.

@@ -109,10 +109,18 @@ int main (int argc, char *argv [])
                 return 1;
         }
 
-        // Convert the argument to Base 64, display it, free up the string, and
-        // then return
+        // Convert the argument to Base 64
 
-        base64 = asctob64 (argv [0], urlencode);
+        if ((base64 = asctob64 (argv [0], urlencode)) == (char *) 0) {
+                // An error occurred, and we could not encode the string. This
+                // is probably a memory error
+
+                perror ("Unable to encode string");
+                return 1;
+        }
+
+        // Display the Base64 encoded string, free it, and return
+        
         printf ("%s\n", base64);
         free (base64);
         return 0;

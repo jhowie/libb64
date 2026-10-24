@@ -1,0 +1,45 @@
+.\"	$NetBSD: mdoc.template,v 1.2 1997/03/25 07:20:01 mikel Exp $
+.\"
+.\" Copyright notice
+.\"
+.\" The following requests are required for all man pages.
+.Dd 2026-10-24
+.Dt b64toasc 1
+.Os
+.Sh NAME
+.Nm b64toasc
+.Nd a tool for decoding a Base64-encoded string to ASCII
+.Sh SYNOPSIS
+.Nm b64toasc
+.Op Fl h
+.Ar string
+.Sh DESCRIPTION
+The command takes Base64-encoded
+.Ar string ,
+decodes it, and returns an ASCII string.
+.Pp
+The
+.Op -h 
+option simply instructs the program to display usage information. No conversion
+is done.
+.Sh RETURN VALUES
+The program returns 0 on success, and 1 when an error occurred.
+.Sh EXAMPLES
+.Bd -literal -offset
+b64toasc SGVsbG8sIHdvcmxkIQ==
+.Sh SEE ALSO
+.Xr asctob64 1 ,
+.Xr b64 3
+.Sh STANDARDS
+.Pp
+The program implements Base64 encoding and decoding according to the Internet
+Engineering Task Force (IETF) Request For Comments (RFC) 4648 "The Base16,
+Base32, and Base64 Data Encodings" standard.
+.Pp
+.Sh AUTHORS
+.Pp
+.An John Howie (Howie Consulting Inc.)
+.Mt john@howieconsultinginc.com
+.Pp
+.Sh BUGS
+There are no known bugs.

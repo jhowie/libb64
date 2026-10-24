@@ -1,0 +1,85 @@
+.\"	$NetBSD: mdoc.template,v 1.2 1997/03/25 07:20:01 mikel Exp $
+.\"
+.\" (c) Howie Consulting Inc., 2026.
+.\"
+.\" The following requests are required for all man pages.
+.Dd 2026-10-24
+.Dt b64 3
+.Os
+.Sh NAME
+.Nm b64
+.Nd a library for encoding ASCII to Base64 and decoding Base64 to ASCII
+.Sh SYNOPSIS
+.Lb b64
+.In b64.h
+.Ft char *
+.Fn asctob64 "const char *ascii" "bool urlencode"
+.Ft char *
+.Fn b64toasc "const char *b64"
+.Sh DESCRIPTION
+The b64 library is a simple library with functions to convert an ASCII string
+to a Base64 encoded string and a Base64 encoded string to an ASCII string.
+.Pp
+The function
+.Fn asctob64
+takes two arguments. The first,
+.Fa ascii ,
+is a pointer to an ASCII string that is to be encoded. The second argument,
+.Fa urlencode ,
+is a boolean value that if set to
+.Em true ,
+instructs the function to use URL-safe encoding rules for the string. when
+URL-safe encoding is performed, the Base64 characters minus and underline are
+used instead of the plus and solidus (slash) characters. The function returns
+according pointer to the Base64 encoded string. The memory for the string is
+allocated in the function, and the caller must use
+.Xr free 3
+when they no longer need the string.
+.Pp
+The function
+.Fn b64toasc
+takes only a single argument,
+.Fa b64 ,
+which is a pointer to a Base64 encoded string. The function returns a pointer
+to a decoded ASCII string. The memory for the string in allocated in the
+function, and should be freed by the caller when no longer required. It does
+not matter whether the Base64 encoded string is encoded using URL-safe
+Base64 characters.
+.Sh RETURN VALUES
+The two library functions return NULL-terminated character strings. Each string
+is allocated in the function, and it is the responsibility of the caller to
+free the string when it is no longer required.
+.Sh EXAMPLES
+The following examples show how to convert an ASCII string to a Base64-encoded
+string, and an encoded Base-64 string to an ASCII string.
+.Ss Encoding ASCII to Base64
+.Bd -literal -offset
+char *asciistr = "Hello, world!", *base64str;
+
+base64str = asctob64 (asciistr, false);
+.Ed
+.Pp
+.Ss Decoding Base64 to ASCII
+.Bd -literal -offset
+char *asciistr, *base64str = "SGVsbG8sIHdvcmxkIQ==";
+
+asciistr = b64toasc (base64str);
+.Ed
+.Sh ERRORS
+.Pp
+The two library functions return a string. If the returned pointer is NULL, the
+library was unable to allocate memory using
+.Xr malloc 3 .
+.Sh STANDARDS
+.Pp
+The library implements Base64 encoding and decoding according to the Internet
+Engineering Task Force (IETF) Request For Comments (RFC) 4648 "The Base16,
+Base32, and Base64 Data Encodings" standard.
+.Pp
+.Sh AUTHORS
+.Pp
+.An John Howie (Howie Consulting Inc.)
+.Mt john@howieconsultinginc.com
+.Pp
+.Sh BUGS
+There are no known bugs.

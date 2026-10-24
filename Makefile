@@ -10,6 +10,7 @@ LIBOBJS=$(addprefix $(OBJDIR)/,b64.o)
 INSTALLBINDIR=/usr/local/bin
 INSTALLLIBDIR=/usr/local/lib
 INSTALLINCLUDEDIR=/usr/local/include
+INSTALLMANDIR=/usr/local/man
 #
 
 $(OBJDIR)/%.o : %.c
@@ -37,10 +38,13 @@ install: $(LIBDIR)/libb64.a $(OBJDIR)/asctob64 $(OBJDIR)/b64toasc
 	install -d -o root -g wheel $(INSTALLINCLUDEDIR)
 	install -c -o root -g wheel -m 0444 b64.h $(INSTALLINCLUDEDIR)
 	install -d -o root -g wheel $(INSTALLBINDIR)
-	install -c -o root -g wheel -m 0444 $(OBJDIR)/asctob64 $(INSTALLBINDIR)
-	install -c -o root -g wheel -m 0444 $(OBJDIR)/b64toasc $(INSTALLBINDIR)
-
-
+	install -c -o root -g wheel -m 0755 $(OBJDIR)/asctob64 $(INSTALLBINDIR)
+	install -c -o root -g wheel -m 0755 $(OBJDIR)/b64toasc $(INSTALLBINDIR)
+	install -d -o root -g wheel $(INSTALLMANDIR)/man1
+	install -d -o root -g wheel $(INSTALLMANDIR)/man3	
+	install -c -o root -g wheel -m 0444 asctob64.1 $(INSTALLMANDIR)/man1
+	install -c -o root -g wheel -m 0444 b64toasc.1 $(INSTALLMANDIR)/man1
+	install -c -o root -g wheel -m 0444 b64.3 $(INSTALLMANDIR)/man3
 
 $(LIBOBJS): $(OBJDIR)
 
